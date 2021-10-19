@@ -1,0 +1,32 @@
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color:rgb(206,215,216);
+}
+h1{
+    color: rgb(49,104,121);
+    text-align: center;
+}
+button{
+    background-color: rgb(244, 122, 96);
+    width: 32%;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+}
+table, th, td{
+    text-align: left;
+}
+th{
+    background-color: rgb(49,104,121);
+    color: white;
+}
+table{
+    width : 100%;
+}
+tr:hover {background-color: rgb(250, 250, 250);}
+.active {
+    background-color: rgb(244, 122, 96);
+}
