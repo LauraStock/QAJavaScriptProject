@@ -31,8 +31,6 @@ let data = [
 "3 Third Mount", "department": "Sales" }
 ];
 
-
-
 let displayData = function (i) {
     // create row in the table
     let row = document.createElement("tr");
@@ -60,13 +58,16 @@ function selectRow(e) {
     var rowSelected = this.id;
 }
 
-
-let table = document.querySelector("#dataTable");
-
-for (i = 0; i < data.length; i++)
-{ 
-    displayData(i);
+function addToArray() {
+    console.log("Submitting form");
 }
+
+
+
+
+
+
+
 
 
 
