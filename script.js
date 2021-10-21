@@ -29,24 +29,48 @@ let data = [
     "32 Banningham Court", "department": "Sales" },
             { "ninumber": "OB043941D", "fullname": "Sandy Beech", "phone": "07958-301691", "address":
     "3 Third Mount", "department": "Sales" }
-    ];
+];
 
+// --------------------- Page Buttons ---------------------------------
 
+// let editbtn = document.querySelector('#editbtn');
+// editbtn.addEventListener("click", function () {
+//     var current = document.getElementsByClassName("active");
+//     if (current.length > 0) {
+//         window.location.href = "./html/edit.html";
+//     }
+// });
 
-let displayData = function (i) {
-    // create row in the table
-    let row = document.createElement("tr");
-    row.id = (i);
-    // fill row with data
-    var c1 = row.insertCell();
-    c1.innerHTML = data[i].fullname;
-    var c2 = row.insertCell();
-    c2.innerHTML = data[i].department;
-    var c3 = row.insertCell();
-    c3.innerHTML = data[i].phone;
-    // allowing select of data
-    row.addEventListener("click",selectRow);
-    table.appendChild(row); // put the row in the table
+// let delbtn = document.querySelector('#delbtn');
+// delbtn.addEventListener("click", function () {
+//     var current = document.getElementsByClassName("active");
+//     if (current.length > 0) {
+//         let index = current[0].id;
+//         data.splice(index, 1);
+//         displayData();
+//         // want to put a check that they want to delete the currently selected employee;
+//         // delete function
+//     }
+// });
+    
+// ------------- Main display functions -------------------
+function displayData(){
+    let table = document.querySelector("#dataTable");
+    for (i = 0; i < data.length; i++) {
+        // create row in the table
+        let row = document.createElement("tr");
+        row.id = (i);
+        // fill row with data
+        var c1 = row.insertCell();
+        c1.innerHTML = data[i].fullname;
+        var c2 = row.insertCell();
+        c2.innerHTML = data[i].department;
+        var c3 = row.insertCell();
+        c3.innerHTML = data[i].phone;
+        // allowing select of data
+        row.addEventListener("click",selectRow);
+        table.appendChild(row); // put the row in the table
+    }
 }
 
 function selectRow(e) {
@@ -60,27 +84,58 @@ function selectRow(e) {
     var rowSelected = this.id;
 }
 
-function addToData(dataToAdd) {
-    data.push(dataToAdd);
-}
+// ------------------ Add Functions ------------------------
 
-function submitAddData() {
-            let name = document.getElementById('fullname');
-            let nino = document.getElementById('ninumber');
-            let dep = document.getElementById('department');
-            let tel = document.getElementById('phone');
-            let addr = document.getElementById('address');
+function createAddForm() {
+    console.log("We are in create form");
+    // create form
+    let div = document.getElementById("addStuff");
+    let form = document.createElement("form");
+    form.id = "addForm";
+    div.appendChild(form);
 
-            let dataToAdd = {
+    // add each input variable
+    let name = document.createElement("input");
+    let label = document.createElement("div");
+    label.innerText = "Full Name:";
+    name.setAttribute("type", "text");
+    
+    label.appendChild(name);
+    form.appendChild(label);
+
+    let dep = document.createElement("input");
+    dep.setAttribute("type", "text");
+    form.appendChild(dep);
+
+    let nino = document.createElement("input");
+    nino.setAttribute("type", "text");
+    form.appendChild(nino);
+
+    let tel = document.createElement("input");
+    tel.setAttribute("type", "text");
+    form.appendChild(tel);
+
+    let addr = document.createElement("input");
+    addr.setAttribute("type", "text");
+    form.appendChild(addr);
+
+    //submit button
+    let button = document.createElement("button");
+    form.appendChild(button);
+    button.addEventListener("click", function () {
+        let dataToAdd = {
                 fullname: name.value,
                 ninumber: nino.value,
                 department: dep.value,
                 phone: tel.value,
                 address: addr.value
             }
-            addToData(dataToAdd);
-        }
+        data.push(dataToAdd);
+        console.log(data);
+        form.remove();
+    });
 
+}
 
 
 

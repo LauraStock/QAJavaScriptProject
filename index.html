@@ -7,20 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
     <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" src="script.js"></script>
 </head>
 
 <body>
-    <script type="text/javascript" src="script.js"></script>
+
     <h1> Employee Information </h1>
 
+    <hr />
 
-    <button id="addbtn">Add</button>
-    <button id="editbtn">Edit</button>
-    <button id="delbtn">Delete</button>
-    <br />
-
-    <div>
-        <br />
+    <div id="display">
         <table id="dataTable">
             <tr>
                 <th>Name</th>
@@ -32,47 +28,21 @@
 
     </div>
 
+    <br />
+    <button id="addbtn" onclick="createAddForm()">Add</button>
+    <button id="editbtn">Edit</button>
+    <button id="delbtn">Delete</button>
+    <br />
+
+    <div id="addStuff"></div>
+    <div id="editStuff"></div>
 
     <script>
-        let table = document.querySelector("#dataTable");
-
-        for (i = 0; i < data.length; i++) {
-            displayData(i);
-        }
-
-        let addbtn = document.querySelector("#addbtn");
-        addbtn.addEventListener("click", function () {
-            window.location.href = "./html/add.html";
-        });
-
-        let editbtn = document.querySelector('#editbtn');
-        editbtn.addEventListener("click", function () {
-            var current = document.getElementsByClassName("active");
-            if (current.length > 0) {
-                window.location.href = "./html/edit.html";
-            }
-
-        });
-
-        let delbtn = document.querySelector('#delbtn');
-        delbtn.addEventListener("click", function () {
-            var current = document.getElementsByClassName("active");
-            if (current.length > 0) {
-                // want to put a check that they want to delete the currently selected employee;
-                // delete function
-            }
-
-        });
-
-
-
+        displayData();
 
 
 
     </script>
-
-
-
 
 
 </body>
