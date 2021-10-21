@@ -32,30 +32,12 @@ var data = [
     "3 Third Mount", "department": "Sales" }
 ];
 
-// --------------------- Page Buttons ---------------------------------
+console.log("we're at the start");
 
-// let editbtn = document.querySelector('#editbtn');
-// editbtn.addEventListener("click", function () {
-//     var current = document.getElementsByClassName("active");
-//     if (current.length > 0) {
-//         window.location.href = "./html/edit.html";
-//     }
-// });
-
-// let delbtn = document.querySelector('#delbtn');
-// delbtn.addEventListener("click", function () {
-//     var current = document.getElementsByClassName("active");
-//     if (current.length > 0) {
-//         let index = current[0].id;
-//         data.splice(index, 1);
-//         displayData();
-//         // want to put a check that they want to delete the currently selected employee;
-//         // delete function
-//     }
-// });
-    
 // ------------- Main display functions -------------------
 function displayData() {
+    console.log("in display function");
+    console.log(data.length);
     let display = document.querySelector("#display");
     let table = document.createElement("table");
     table.id = "dataTable";
@@ -66,9 +48,9 @@ function displayData() {
         let col = document.createElement("th");
         col.innerHTML = headingString[i];
         headers.appendChild(col);
-        console.log([i]);
-        console.log(headingString[i]);
-        console.log(col);
+        //console.log([i]);
+        //console.log(headingString[i]);
+        //console.log(col);
     }
     table.appendChild(headers);
     for (i = 0; i < data.length; i++) {
@@ -92,6 +74,14 @@ function displayData() {
     }
 }
 
+function updateTable() {
+    console.log("we're in the update function");
+    console.log(data.length);
+    let table = document.querySelector("#dataTable");
+    table.remove();
+    displayData();
+}
+
 function selectRow(e) {
     var current = document.getElementsByClassName("active");
     // If there's no active class
@@ -105,7 +95,7 @@ function selectRow(e) {
 
 // ------------------ Add Functions ------------------------
 
-function createAddForm(data) {
+function createAddForm() {
     console.log("We are in create form");
     console.log(data);
     // create form
@@ -134,34 +124,6 @@ function createAddForm(data) {
         form.appendChild(br);
     }
 
-    // for (i = 0; i < inputNames.length; i++) {
-    //     let label = document.createElement("div");
-    //     label.innerText = inputLabels[i];
-    //     let formField = document.createElement("input");
-    //     formField.setAttribute("type", "text");
-    //     inputNames.push(formField);
-    //     label.appendChild(formField);
-    //     form.appendChild(label);
-    // }
-
-    
-
-    // let dep = document.createElement("input");
-    // dep.setAttribute("type", "text");
-    // form.appendChild(dep);
-
-    // let nino = document.createElement("input");
-    // nino.setAttribute("type", "text");
-    // form.appendChild(nino);
-
-    // let tel = document.createElement("input");
-    // tel.setAttribute("type", "text");
-    // form.appendChild(tel);
-
-    // let addr = document.createElement("input");
-    // addr.setAttribute("type", "text");
-    // form.appendChild(addr);
-
     //submit button
     let button = document.createElement("button");
     button.value = "Submit";
@@ -178,38 +140,12 @@ function createAddForm(data) {
         console.log(dataToAdd);
         data.push(dataToAdd);
         console.log(data.length);
+        console.log("we are in add function");
+        console.log(data.length);
         
-        // let dataToAdd = {
-        //         fullname: fullname.value,
-        //         ninumber: nino.value,
-        //         department: dep.value,
-        //         phone: tel.value,
-        //         address: addr.value
-        //     const rowName = ["fullname", "department", "ninumber", "phone", "address"];
-        // for (i = 0; i < inputNames.length; i++) {
-        //     console.log(rowName[i]);
-        //     console.log(inputNames[i].value);
-        //         //dataToAdd[rowName[i]] = inputNames[i].value;
-        //     }
-        
-        // //data.push(dataToAdd);
-        // //form.remove();
-        // console.log(data);
-        // displayData();
         updateTable();
     });
-    function viewData() {
-        console.log(data);
-        let table = document.getElementsByTagName("tr");
-        console.log(table[0])
-        
-        for (i = 0; i < table.length; i++) {
-            table[i].remove();
-        }
-        console.log(table);
-        displayData();
-    }
-
+    
 }
 
 
@@ -225,11 +161,7 @@ function delData() {
     updateTable();
 }
 
-function updateTable() {
-    let table = document.querySelector("#dataTable");
-    table.remove();
-    displayData();
-}
+
 
 
 
