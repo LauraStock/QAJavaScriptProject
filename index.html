@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <script type="text/javascript" src="script.js"></script>
     <h1> Employee Information </h1>
 
 
@@ -32,7 +33,46 @@
     </div>
 
 
-    <script type="text/javascript" src="script.js"></script>
+    <script>
+        let table = document.querySelector("#dataTable");
+
+        for (i = 0; i < data.length; i++) {
+            displayData(i);
+        }
+
+        let addbtn = document.querySelector("#addbtn");
+        addbtn.addEventListener("click", function () {
+            window.location.href = "./html/add.html";
+        });
+
+        let editbtn = document.querySelector('#editbtn');
+        editbtn.addEventListener("click", function () {
+            var current = document.getElementsByClassName("active");
+            if (current.length > 0) {
+                window.location.href = "./html/edit.html";
+            }
+
+        });
+
+        let delbtn = document.querySelector('#delbtn');
+        delbtn.addEventListener("click", function () {
+            var current = document.getElementsByClassName("active");
+            if (current.length > 0) {
+                // want to put a check that they want to delete the currently selected employee;
+                // delete function
+            }
+
+        });
+
+
+
+
+
+
+    </script>
+
+
+
 
 
 </body>

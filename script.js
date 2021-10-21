@@ -31,8 +31,6 @@ let data = [
 "3 Third Mount", "department": "Sales" }
 ];
 
-
-
 let displayData = function (i) {
     // create row in the table
     let row = document.createElement("tr");
@@ -60,13 +58,33 @@ function selectRow(e) {
     var rowSelected = this.id;
 }
 
-
-let table = document.querySelector("#dataTable");
-
-for (i = 0; i < data.length; i++)
-{ 
-    displayData(i);
+function addToData(dataToAdd) {
+    data.push(dataToAdd);
 }
+
+function submitAddData() {
+            let name = document.getElementById('fullname');
+            let nino = document.getElementById('ninumber');
+            let dep = document.getElementById('department');
+            let tel = document.getElementById('phone');
+            let addr = document.getElementById('address');
+
+            let dataToAdd = {
+                fullname: name.value,
+                ninumber: nino.value,
+                department: dep.value,
+                phone: tel.value,
+                address: addr.value
+            }
+            addToData(dataToAdd);
+        }
+
+
+
+
+
+
+
 
 
 
