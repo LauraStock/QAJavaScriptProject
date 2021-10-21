@@ -35,9 +35,9 @@ tr:hover {background-color: rgb(250, 250, 250);}
 .active {
     background-color: rgb(244, 122, 96);
 }
-form input{
+form div{
     display:inline-block;
-    align-items: centre;
+    align-items: center;
     width: 300px;
     margin-bottom: 10px;
 }

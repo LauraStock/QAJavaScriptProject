@@ -1,4 +1,5 @@
-let data = [
+
+var data = [
             { "ninumber": "ZS502747A", "fullname": "Chris P Bacon", "phone": "07659-831024", "address":
     "123 Elliot Hill", "department": "IT" },
             { "ninumber": "XS130502B", "fullname": "Miles A Head", "phone": "07666-616680", "address":
@@ -54,8 +55,22 @@ let data = [
 // });
     
 // ------------- Main display functions -------------------
-function displayData(){
-    let table = document.querySelector("#dataTable");
+function displayData() {
+    let display = document.querySelector("#display");
+    let table = document.createElement("table");
+    table.id = "dataTable";
+    display.appendChild(table);
+    let headers = document.createElement("tr");
+    headingString = ["Name", "Department", "Phone", "Address", "NINO"];
+    for (i = 0; i < headingString.length; i++) {
+        let col = document.createElement("th");
+        col.innerHTML = headingString[i];
+        headers.appendChild(col);
+        console.log([i]);
+        console.log(headingString[i]);
+        console.log(col);
+    }
+    table.appendChild(headers);
     for (i = 0; i < data.length; i++) {
         // create row in the table
         let row = document.createElement("tr");
@@ -67,6 +82,10 @@ function displayData(){
         c2.innerHTML = data[i].department;
         var c3 = row.insertCell();
         c3.innerHTML = data[i].phone;
+        var c4 = row.insertCell();
+        c4.innerHTML = data[i].address;
+        var c5 = row.insertCell();
+        c5.innerHTML = data[i].ninumber;
         // allowing select of data
         row.addEventListener("click",selectRow);
         table.appendChild(row); // put the row in the table
@@ -86,8 +105,9 @@ function selectRow(e) {
 
 // ------------------ Add Functions ------------------------
 
-function createAddForm() {
+function createAddForm(data) {
     console.log("We are in create form");
+    console.log(data);
     // create form
     let div = document.getElementById("addStuff");
     let form = document.createElement("form");
@@ -95,46 +115,120 @@ function createAddForm() {
     div.appendChild(form);
 
     // add each input variable
-    let name = document.createElement("input");
-    let label = document.createElement("div");
-    label.innerText = "Full Name:";
-    name.setAttribute("type", "text");
+    const inputLabels = ["National Insurance Number","Full Name",  "Phone", "Address", "Department"];
+    var inputNames = [];
+
+    for (i = 0; i < inputLabels.length; i++) {
+        //create the label for each input
+        let label= document.createElement("div");
+        label.innerText = inputLabels[i];
+
+        //create input box
+        let inputBox = document.createElement("input");
+        inputNames.push(inputBox);
+        let br = document.createElement("br");
+
+        // put everything in the right place
+        label.appendChild(inputBox);
+        form.appendChild(label);
+        form.appendChild(br);
+    }
+
+    // for (i = 0; i < inputNames.length; i++) {
+    //     let label = document.createElement("div");
+    //     label.innerText = inputLabels[i];
+    //     let formField = document.createElement("input");
+    //     formField.setAttribute("type", "text");
+    //     inputNames.push(formField);
+    //     label.appendChild(formField);
+    //     form.appendChild(label);
+    // }
+
     
-    label.appendChild(name);
-    form.appendChild(label);
 
-    let dep = document.createElement("input");
-    dep.setAttribute("type", "text");
-    form.appendChild(dep);
+    // let dep = document.createElement("input");
+    // dep.setAttribute("type", "text");
+    // form.appendChild(dep);
 
-    let nino = document.createElement("input");
-    nino.setAttribute("type", "text");
-    form.appendChild(nino);
+    // let nino = document.createElement("input");
+    // nino.setAttribute("type", "text");
+    // form.appendChild(nino);
 
-    let tel = document.createElement("input");
-    tel.setAttribute("type", "text");
-    form.appendChild(tel);
+    // let tel = document.createElement("input");
+    // tel.setAttribute("type", "text");
+    // form.appendChild(tel);
 
-    let addr = document.createElement("input");
-    addr.setAttribute("type", "text");
-    form.appendChild(addr);
+    // let addr = document.createElement("input");
+    // addr.setAttribute("type", "text");
+    // form.appendChild(addr);
 
     //submit button
     let button = document.createElement("button");
+    button.value = "Submit";
+    button.innerHTML = "Submit";
     form.appendChild(button);
+    const rowName = ["ninumber", "fullname", "phone", "address", "department"];
     button.addEventListener("click", function () {
-        let dataToAdd = {
-                fullname: name.value,
-                ninumber: nino.value,
-                department: dep.value,
-                phone: tel.value,
-                address: addr.value
-            }
-        data.push(dataToAdd);
+        dataToAdd = new Object();
         console.log(data);
-        form.remove();
+        for (i = 0; i < inputNames.length; i++) {
+            console.log(inputNames[i].value);
+            dataToAdd[rowName[i]] = inputNames[i].value;
+        }
+        console.log(dataToAdd);
+        data.push(dataToAdd);
+        console.log(data.length);
+        
+        // let dataToAdd = {
+        //         fullname: fullname.value,
+        //         ninumber: nino.value,
+        //         department: dep.value,
+        //         phone: tel.value,
+        //         address: addr.value
+        //     const rowName = ["fullname", "department", "ninumber", "phone", "address"];
+        // for (i = 0; i < inputNames.length; i++) {
+        //     console.log(rowName[i]);
+        //     console.log(inputNames[i].value);
+        //         //dataToAdd[rowName[i]] = inputNames[i].value;
+        //     }
+        
+        // //data.push(dataToAdd);
+        // //form.remove();
+        // console.log(data);
+        // displayData();
+        updateTable();
     });
+    function viewData() {
+        console.log(data);
+        let table = document.getElementsByTagName("tr");
+        console.log(table[0])
+        
+        for (i = 0; i < table.length; i++) {
+            table[i].remove();
+        }
+        console.log(table);
+        displayData();
+    }
 
+}
+
+
+// ------------------- DELETE FUNCTIONS --------------------
+function delData() {
+    let row = document.getElementsByClassName("active");
+    //console.log(row);
+    let ind = row[0].id;
+    //console.log(ind);
+    //console.log(data.length);
+    data.splice(ind, 1);
+    //console.log(data.length);
+    updateTable();
+}
+
+function updateTable() {
+    let table = document.querySelector("#dataTable");
+    table.remove();
+    displayData();
 }
 
 
