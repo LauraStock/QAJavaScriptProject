@@ -58,9 +58,26 @@ function selectRow(e) {
     var rowSelected = this.id;
 }
 
-function addToArray() {
-    console.log("Submitting form");
+function addToData(dataToAdd) {
+    data.push(dataToAdd);
 }
+
+function submitAddData() {
+            let name = document.getElementById('fullname');
+            let nino = document.getElementById('ninumber');
+            let dep = document.getElementById('department');
+            let tel = document.getElementById('phone');
+            let addr = document.getElementById('address');
+
+            let dataToAdd = {
+                fullname: name.value,
+                ninumber: nino.value,
+                department: dep.value,
+                phone: tel.value,
+                address: addr.value
+            }
+            addToData(dataToAdd);
+        }
 
 
 
