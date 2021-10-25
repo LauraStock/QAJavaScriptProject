@@ -45,7 +45,7 @@ function displayData() {
     table.id = "dataTable";
     display.appendChild(table);
     let headers = document.createElement("tr");
-    headingString = ["Name", "Department", "Phone", "Address", "NINO"];
+    headingString = ["NINO","Full Name",  "Phone", "Address", "Department"];
     for (i = 0; i < headingString.length; i++) {
         let col = document.createElement("th");
         col.innerHTML = headingString[i];
@@ -61,15 +61,15 @@ function displayData() {
         row.id = (i);
         // fill row with data
         var c1 = row.insertCell();
-        c1.innerHTML = data[i].fullname;
+        c1.innerHTML = data[i].ninumber;
         var c2 = row.insertCell();
-        c2.innerHTML = data[i].department;
+        c2.innerHTML = data[i].fullname;
         var c3 = row.insertCell();
         c3.innerHTML = data[i].phone;
         var c4 = row.insertCell();
         c4.innerHTML = data[i].address;
         var c5 = row.insertCell();
-        c5.innerHTML = data[i].ninumber;
+        c5.innerHTML = data[i].department;
         // allowing select of data
         row.addEventListener("click",selectRow);
         table.appendChild(row); // put the row in the table
@@ -86,15 +86,15 @@ function addToTable(dataToAdd) {
         row.id = data.length -1;
         // fill row with data
         var c1 = row.insertCell();
-        c1.innerHTML = dataToAdd.fullname;
+        c1.innerHTML = dataToAdd.ninumber;
         var c2 = row.insertCell();
-        c2.innerHTML = dataToAdd.department;
+        c2.innerHTML = dataToAdd.fullname;
         var c3 = row.insertCell();
         c3.innerHTML = dataToAdd.phone;
         var c4 = row.insertCell();
         c4.innerHTML = dataToAdd.address;
         var c5 = row.insertCell();
-        c5.innerHTML = dataToAdd.ninumber;
+        c5.innerHTML = dataToAdd.department;
         // allowing select of data
         row.addEventListener("click",selectRow);
         table.appendChild(row); // put the row in the table
