@@ -190,8 +190,67 @@ function delData() {
 }
 
 
-// -------------------- EDIT FUNCTION -----------------------
-
+// -------------------- EDIT FUNCTIONS -----------------------
+function editData(){
+        // get the id of the selected row
+        console.log("We are in editing");
+        let row = document.getElementsByClassName("active");
+        row = row[0];
+        let ind = row.id;
+        console.log(row);
+        console.log(ind);
+        console.log(row.cells[0].innerHTML);
+        
+        // create form
+        let div = document.getElementById("editStuff");
+        let form = document.createElement("form");
+        form.id = "editForm";
+        div.appendChild(form);
+    
+        // add each input variable
+        const inputLabels = ["National Insurance Number","Full Name",  "Phone", "Address", "Department"];
+        var inputNames = [];
+    
+        for (i = 0; i < inputLabels.length; i++) {
+            //create the label for each input
+            let label= document.createElement("div");
+            label.innerText = inputLabels[i];
+    
+            //create input box
+            let inputBox = document.createElement("input");
+            inputBox.setAttribute("value",row.cells[i].innerHTML);
+            inputNames.push(inputBox);
+            let br = document.createElement("br");
+    
+            // put everything in the right place
+            label.appendChild(inputBox);
+            form.appendChild(label);
+            form.appendChild(br);
+            }
+    
+        //submit button
+        let button = document.createElement("button");
+        //button.value = "Submit";
+        button.innerHTML = "Submit";
+        form.appendChild(button);
+        const rowName = ["ninumber", "fullname", "phone", "address", "department"];
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+            dataToAdd = new Object();
+            console.log(data);
+            for (i = 0; i < inputNames.length; i++) {
+                console.log(inputNames[i].value);
+                dataToAdd[rowName[i]] = inputNames[i].value;
+                row.cells[i].innerHTML = inputNames[i].value;
+            }
+            console.log(data.length);
+            console.log(dataToAdd);
+            data[ind] = dataToAdd;
+            console.log(data.length);
+            
+            form.remove();
+        });
+    }
 
 
 
