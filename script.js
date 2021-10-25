@@ -33,6 +33,32 @@ var data = [
 
 console.log("we're at the start");
 displayData();
+departmentFilter();
+
+// ------------- Department Fitler ------------------------
+function departmentFilter(){
+        let depOptions = ["All"];
+        var select = document.getElementById("depOptions");
+        var option = document.createElement("option");
+        option.setAttribute("value","All");
+        var text = document.createTextNode("All");
+        option.appendChild(text);
+        select.appendChild(option);
+
+        for (i=0; i<data.length; i++)
+        {
+                if (!depOptions.includes(data[i].department))
+                {
+                        depOptions.push(data[i].department);
+                        var option = document.createElement("option");
+                        option.setAttribute("value",data[i].department);
+                        var text = document.createTextNode(data[i].department);
+                        option.appendChild(text);
+                        select.appendChild(option);
+                }
+        }
+        console.log(depOptions);
+}
 
 
 // ------------- Main display functions -------------------
@@ -112,7 +138,6 @@ function selectRow(e) {
     }
     // Add the active class to the current/clicked button
     this.className += " active";
-    var rowSelected = this.id;
 }
 
 // ------------------ Add Functions ------------------------
@@ -251,9 +276,3 @@ function editData(){
             form.remove();
         });
     }
-
-
-
-
-
-
