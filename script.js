@@ -33,6 +33,32 @@ var data = [
 
 console.log("we're at the start");
 displayData();
+departmentFilter();
+
+// ------------- Department Fitler ------------------------
+function departmentFilter(){
+        let depOptions = ["All"];
+        var select = document.getElementById("depOptions");
+        var option = document.createElement("option");
+        option.setAttribute("value","All");
+        var text = document.createTextNode("All");
+        option.appendChild(text);
+        select.appendChild(option);
+
+        for (i=0; i<data.length; i++)
+        {
+                if (!depOptions.includes(data[i].department))
+                {
+                        depOptions.push(data[i].department);
+                        var option = document.createElement("option");
+                        option.setAttribute("value",data[i].department);
+                        var text = document.createTextNode(data[i].department);
+                        option.appendChild(text);
+                        select.appendChild(option);
+                }
+        }
+        console.log(depOptions);
+}
 
 
 // ------------- Main display functions -------------------
@@ -45,7 +71,7 @@ function displayData() {
     table.id = "dataTable";
     display.appendChild(table);
     let headers = document.createElement("tr");
-    headingString = ["Name", "Department", "Phone", "Address", "NINO"];
+    headingString = ["NINO","Full Name",  "Phone", "Address", "Department"];
     for (i = 0; i < headingString.length; i++) {
         let col = document.createElement("th");
         col.innerHTML = headingString[i];
@@ -61,15 +87,15 @@ function displayData() {
         row.id = (i);
         // fill row with data
         var c1 = row.insertCell();
-        c1.innerHTML = data[i].fullname;
+        c1.innerHTML = data[i].ninumber;
         var c2 = row.insertCell();
-        c2.innerHTML = data[i].department;
+        c2.innerHTML = data[i].fullname;
         var c3 = row.insertCell();
         c3.innerHTML = data[i].phone;
         var c4 = row.insertCell();
         c4.innerHTML = data[i].address;
         var c5 = row.insertCell();
-        c5.innerHTML = data[i].ninumber;
+        c5.innerHTML = data[i].department;
         // allowing select of data
         row.addEventListener("click",selectRow);
         table.appendChild(row); // put the row in the table
@@ -86,15 +112,15 @@ function addToTable(dataToAdd) {
         row.id = data.length -1;
         // fill row with data
         var c1 = row.insertCell();
-        c1.innerHTML = dataToAdd.fullname;
+        c1.innerHTML = dataToAdd.ninumber;
         var c2 = row.insertCell();
-        c2.innerHTML = dataToAdd.department;
+        c2.innerHTML = dataToAdd.fullname;
         var c3 = row.insertCell();
         c3.innerHTML = dataToAdd.phone;
         var c4 = row.insertCell();
         c4.innerHTML = dataToAdd.address;
         var c5 = row.insertCell();
-        c5.innerHTML = dataToAdd.ninumber;
+        c5.innerHTML = dataToAdd.department;
         // allowing select of data
         row.addEventListener("click",selectRow);
         table.appendChild(row); // put the row in the table
@@ -112,7 +138,6 @@ function selectRow(e) {
     }
     // Add the active class to the current/clicked button
     this.className += " active";
-    var rowSelected = this.id;
 }
 
 // ------------------ Add Functions ------------------------
@@ -190,11 +215,64 @@ function delData() {
 }
 
 
-// -------------------- EDIT FUNCTION -----------------------
-
-
-
-
-
-
-
+// -------------------- EDIT FUNCTIONS -----------------------
+function editData(){
+        // get the id of the selected row
+        console.log("We are in editing");
+        let row = document.getElementsByClassName("active");
+        row = row[0];
+        let ind = row.id;
+        console.log(row);
+        console.log(ind);
+        console.log(row.cells[0].innerHTML);
+        
+        // create form
+        let div = document.getElementById("editStuff");
+        let form = document.createElement("form");
+        form.id = "editForm";
+        div.appendChild(form);
+    
+        // add each input variable
+        const inputLabels = ["National Insurance Number","Full Name",  "Phone", "Address", "Department"];
+        var inputNames = [];
+    
+        for (i = 0; i < inputLabels.length; i++) {
+            //create the label for each input
+            let label= document.createElement("div");
+            label.innerText = inputLabels[i];
+    
+            //create input box
+            let inputBox = document.createElement("input");
+            inputBox.setAttribute("value",row.cells[i].innerHTML);
+            inputNames.push(inputBox);
+            let br = document.createElement("br");
+    
+            // put everything in the right place
+            label.appendChild(inputBox);
+            form.appendChild(label);
+            form.appendChild(br);
+            }
+    
+        //submit button
+        let button = document.createElement("button");
+        //button.value = "Submit";
+        button.innerHTML = "Submit";
+        form.appendChild(button);
+        const rowName = ["ninumber", "fullname", "phone", "address", "department"];
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+            dataToAdd = new Object();
+            console.log(data);
+            for (i = 0; i < inputNames.length; i++) {
+                console.log(inputNames[i].value);
+                dataToAdd[rowName[i]] = inputNames[i].value;
+                row.cells[i].innerHTML = inputNames[i].value;
+            }
+            console.log(data.length);
+            console.log(dataToAdd);
+            data[ind] = dataToAdd;
+            console.log(data.length);
+            
+            form.remove();
+        });
+    }
