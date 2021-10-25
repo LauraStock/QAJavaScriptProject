@@ -33,6 +33,35 @@ var data = [
 
 console.log("we're at the start");
 displayData();
+departmentFilter();
+
+// -------------- Filter Function -------------------------
+function departmentFilter(){
+        var select = document.getElementById("depSelect");
+        var option = document.createElement("option");
+        option.setAttribute("value","All");
+        var text = document.createTextNode("All");
+        option.appendChild(text);
+        select.appendChild(option);
+        var depOptions = ["All"];
+
+        for (i = 0; i < data.length; i++){
+                var dep = data[i].department;
+                if (!depOptions.includes(dep)){
+                        depOptions.push(dep);
+                        var option = document.createElement("option");
+                        option.setAttribute("value",dep);
+                        var text = document.createTextNode(dep);
+                        option.appendChild(text);
+                        select.appendChild(option);
+                }
+        }
+
+}
+function displayFilter(index){
+        console.log("in filter function");
+        console.log(index);
+}
 
 
 // ------------- Main display functions -------------------
