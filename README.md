@@ -2,6 +2,9 @@
 
 QA Academy Project to create a simple HR application using HTML 5, Javascript and CSS. 
 
+## Acknowledgements
+Thanks to Aswene and Morgan from QA for advising to keep the application to one html page which solved the problems I faced when overcomplicating this project.
+
 ## Features
 * The application opens with a list of dummy data ready to use.
 * Viewing employee data stored in an array.
