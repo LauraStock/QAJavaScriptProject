@@ -14,9 +14,7 @@
 
     <h1> Employee Information </h1>
 
-    <hr />
-
-
+    <!-- Department filter option-->
     <div>
         <form>
             Filter by Department:
@@ -25,57 +23,24 @@
             </select>            
         </form>
     </div>
+    <br/>
 
+    <!--Data Table -->
+    <div id="display"></div>
 
-    <div id="display">
-        <!-- <table id="dataTable">
-            <tr>
-                <th>Name</th>
-                <th>Department</th>
-                <th>Phone</th>
-            </tr>
-        </table> -->
-
-
-    </div>
-
+    <!-- Function Buttons -->
     <br />
     <button id="addbtn" onclick="createAddForm()">Add</button>
     <button id="editbtn" onclick="editData()">Edit</button>
     <button id="delbtn" onclick="delData()">Delete</button>
     <br />
 
+    <!-- Areas for user input-->
     <div id="addStuff"><br /></div>
     <div id="editStuff"></div>
 
+    <!-- Javascript-->
     <script type="text/javascript" src="script.js"></script>
-
-    <script>
-
-
-        // var garage = [
-        //     { car: "volvo", colour: "blue" }
-        // ];
-        // console.log(garage);
-        // addCar();
-        // console.log(garage);
-
-
-        // function addCar() {
-        //     let item = { car: "ford", colour: "red" };
-        //     garage.push(item);
-        //     console.log(garage)
-        // }
-
-        // function viewgarage() {
-        //     console.log(garage);
-        // }
-
-
-
-
-    </script>
-
 
 </body>
 

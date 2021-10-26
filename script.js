@@ -59,9 +59,9 @@ function departmentFilter(){
         }
 }
 
+
 function displayFilter(){
         var select = document.getElementById("depSelect");
-        console.log(select.value);
         var table = document.getElementById("dataTable");
         let j = table.childElementCount;
         for (let i = 1; i < j; i++){
@@ -82,15 +82,15 @@ function addRowToTable(dataID){
         row.id = (dataID);
         // fill row with data
         var c1 = row.insertCell();
-        c1.innerHTML = data[dataID].fullname;
+        c1.innerHTML = data[dataID].ninumber;
         var c2 = row.insertCell();
-        c2.innerHTML = data[dataID].department;
+        c2.innerHTML = data[dataID].fullname;
         var c3 = row.insertCell();
         c3.innerHTML = data[dataID].phone;
         var c4 = row.insertCell();
         c4.innerHTML = data[dataID].address;
         var c5 = row.insertCell();
-        c5.innerHTML = data[dataID].ninumber;
+        c5.innerHTML = data[dataID].department;
         // allowing select of data
         row.addEventListener("click",selectRow);
         table.appendChild(row); // put the row in the table
@@ -100,8 +100,6 @@ function addRowToTable(dataID){
 // ------------- Main display functions -------------------
 function displayData() {
              
-    console.log("in display function");
-    console.log(data.length);
     let display = document.querySelector("#display");
     let table = document.createElement("table");
     table.id = "dataTable";
@@ -112,9 +110,6 @@ function displayData() {
         let col = document.createElement("th");
         col.innerHTML = headingString[i];
         headers.appendChild(col);
-        //console.log([i]);
-        //console.log(headingString[i]);
-        //console.log(col);
     }
     table.appendChild(headers);
 
@@ -136,7 +131,6 @@ function selectRow(e) {
 // ------------------ Add Functions ------------------------
 
 function createAddForm() {
-    console.log("We are in create form");
     
     // create form
     let div = document.getElementById("addStuff");
@@ -146,6 +140,8 @@ function createAddForm() {
 
     // add each input variable
     const inputLabels = ["National Insurance Number","Full Name",  "Phone", "Address", "Department"];
+    const inputType = ["","","tel"];
+    const inputSize = ["9"];
     var inputNames = [];
 
     for (let i = 0; i < inputLabels.length; i++) {
@@ -155,6 +151,17 @@ function createAddForm() {
 
         //create input box
         let inputBox = document.createElement("input");
+        switch (i){
+                case 0:
+                        inputBox.setAttribute("pattern","[A-Za-z]{2}[0-9]{6}[ABCDabcd]{1}");
+                        break;
+                case 2:
+                        inputBox.setAttribute("type","tel");
+                        break;
+                case 3:
+                        inputBox.setAttribute("size","100");
+                        break;
+        }
         inputNames.push(inputBox);
         let br = document.createElement("br");
 
@@ -166,24 +173,17 @@ function createAddForm() {
 
         //submit button
         let button = document.createElement("button");
-        //button.value = "Submit";
         button.innerHTML = "Submit";
         form.appendChild(button);
         const rowName = ["ninumber", "fullname", "phone", "address", "department"];
         button.addEventListener("click", function (event) {
         event.preventDefault();
         dataToAdd = new Object();
-        console.log(data);
         for (let i = 0; i < inputNames.length; i++) {
-            console.log(inputNames[i].value);
             dataToAdd[rowName[i]] = inputNames[i].value;
         }
-        console.log(dataToAdd);
+
         data.push(dataToAdd);
-        console.log(data.length);
-        console.log("we are in add function");
-        console.log(data.length);
-        
         addToTable(dataToAdd);
         form.remove();
     });
@@ -205,9 +205,6 @@ function delData() {
     console.log(row);
     let ind = row[0].id;
     console.log(ind);
-    //console.log(data.length);
-    
-    //console.log(data.length);
     let table = document.getElementById("dataTable");
     console.log(table);
     console.log(table.childNodes);
@@ -219,13 +216,9 @@ function delData() {
 // -------------------- EDIT FUNCTIONS -----------------------
 function editData(){
         // get the id of the selected row
-        console.log("We are in editing");
         let row = document.getElementsByClassName("active");
         row = row[0];
         let ind = row.id;
-        console.log(row);
-        console.log(ind);
-        console.log(row.cells[0].innerHTML);
         
         // create form
         let div = document.getElementById("editStuff");
@@ -252,11 +245,10 @@ function editData(){
             label.appendChild(inputBox);
             form.appendChild(label);
             form.appendChild(br);
-            }
+        }
     
         //submit button
         let button = document.createElement("button");
-        //button.value = "Submit";
         button.innerHTML = "Submit";
         form.appendChild(button);
         const rowName = ["ninumber", "fullname", "phone", "address", "department"];
@@ -276,4 +268,4 @@ function editData(){
             
             form.remove();
         });
-    }
+}
