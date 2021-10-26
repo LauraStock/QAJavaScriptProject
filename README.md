@@ -22,4 +22,5 @@ After the academy, this task was expected to be a challenge. The main issue was 
 In the future this project would be extended to include more security features such as keeping the NINO and address of employees hidden on the main table so these fields are only accessed when necessary and having a secondary check before deleting employee data.
 
 The Jira board for this project can be found at https://tdp-demo.atlassian.net/jira/software/projects/QJP/boards/3/roadmap
+![qa_javascript_project_2021-10-26_11 19am](https://user-images.githubusercontent.com/90683531/138859398-f7a7a077-0012-427f-9010-1c083ee5a147.png)
 
