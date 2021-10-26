@@ -58,9 +58,42 @@ function departmentFilter(){
         }
 
 }
-function displayFilter(index){
-        console.log("in filter function");
-        console.log(index);
+function displayFilter(){
+        var select = document.getElementById("depSelect");
+        console.log(select.value);
+        var table = document.getElementById("dataTable");
+        let j = table.childElementCount;
+        for (let i = 1; i < j; i++){
+                table.removeChild(table.lastChild);
+        }
+        for (let i = 0; i<data.length; i++){
+                if (data[i].department == select.value){
+                        addRowToTable(i);
+                } else if (select.value == "All"){
+                        addRowToTable(i);
+                }
+        }
+        
+}
+function addRowToTable(dataID){
+        var table = document.getElementById("dataTable");
+        let row = document.createElement("tr");
+        row.id = (dataID);
+        // fill row with data
+        var c1 = row.insertCell();
+        c1.innerHTML = data[dataID].fullname;
+        var c2 = row.insertCell();
+        c2.innerHTML = data[dataID].department;
+        var c3 = row.insertCell();
+        c3.innerHTML = data[dataID].phone;
+        var c4 = row.insertCell();
+        c4.innerHTML = data[dataID].address;
+        var c5 = row.insertCell();
+        c5.innerHTML = data[dataID].ninumber;
+        // allowing select of data
+        row.addEventListener("click",selectRow);
+        table.appendChild(row); // put the row in the table
+
 }
 
 
@@ -84,54 +117,12 @@ function displayData() {
         //console.log(col);
     }
     table.appendChild(headers);
-    for (i = 0; i < data.length; i++) {
-        // create row in the table
-        let row = document.createElement("tr");
-        row.id = (i);
-        // fill row with data
-        var c1 = row.insertCell();
-        c1.innerHTML = data[i].fullname;
-        var c2 = row.insertCell();
-        c2.innerHTML = data[i].department;
-        var c3 = row.insertCell();
-        c3.innerHTML = data[i].phone;
-        var c4 = row.insertCell();
-        c4.innerHTML = data[i].address;
-        var c5 = row.insertCell();
-        c5.innerHTML = data[i].ninumber;
-        // allowing select of data
-        row.addEventListener("click",selectRow);
-        table.appendChild(row); // put the row in the table
+    for (let i = 0; i < data.length; i++) {
+            addRowToTable(i);
     }
 }
 
-function addToTable(dataToAdd) {
-    console.log("we're in the update function");
-    console.log(data.length);
-    console.log(dataToAdd);
-    let table = document.querySelector("#dataTable");
-        // create row in the table
-        let row = document.createElement("tr");
-        row.id = data.length -1;
-        // fill row with data
-        var c1 = row.insertCell();
-        c1.innerHTML = dataToAdd.fullname;
-        var c2 = row.insertCell();
-        c2.innerHTML = dataToAdd.department;
-        var c3 = row.insertCell();
-        c3.innerHTML = dataToAdd.phone;
-        var c4 = row.insertCell();
-        c4.innerHTML = dataToAdd.address;
-        var c5 = row.insertCell();
-        c5.innerHTML = dataToAdd.ninumber;
-        // allowing select of data
-        row.addEventListener("click",selectRow);
-        table.appendChild(row); // put the row in the table
-    
 
-    //table.remove();
-    //displayData();
-}
 
 function selectRow(e) {
     var current = document.getElementsByClassName("active");
@@ -141,7 +132,6 @@ function selectRow(e) {
     }
     // Add the active class to the current/clicked button
     this.className += " active";
-    var rowSelected = this.id;
 }
 
 // ------------------ Add Functions ------------------------
@@ -159,7 +149,7 @@ function createAddForm() {
     const inputLabels = ["National Insurance Number","Full Name",  "Phone", "Address", "Department"];
     var inputNames = [];
 
-    for (i = 0; i < inputLabels.length; i++) {
+    for (let i = 0; i < inputLabels.length; i++) {
         //create the label for each input
         let label= document.createElement("div");
         label.innerText = inputLabels[i];
@@ -175,17 +165,17 @@ function createAddForm() {
         form.appendChild(br);
         }
 
-    //submit button
-    let button = document.createElement("button");
-    //button.value = "Submit";
-    button.innerHTML = "Submit";
-    form.appendChild(button);
-    const rowName = ["ninumber", "fullname", "phone", "address", "department"];
-    button.addEventListener("click", function (event) {
+        //submit button
+        let button = document.createElement("button");
+        //button.value = "Submit";
+        button.innerHTML = "Submit";
+        form.appendChild(button);
+        const rowName = ["ninumber", "fullname", "phone", "address", "department"];
+        button.addEventListener("click", function (event) {
         event.preventDefault();
         dataToAdd = new Object();
         console.log(data);
-        for (i = 0; i < inputNames.length; i++) {
+        for (let i = 0; i < inputNames.length; i++) {
             console.log(inputNames[i].value);
             dataToAdd[rowName[i]] = inputNames[i].value;
         }
@@ -199,6 +189,14 @@ function createAddForm() {
         form.remove();
     });
     
+}
+
+function addToTable(dataToAdd) {
+        console.log("we're in the update function");
+        console.log(data.length);
+        console.log(dataToAdd);
+        let table = document.querySelector("#dataTable");
+        addRowToTable(data.length -1);   
 }
 
 
