@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+
+    <h1> Employee Information </h1>
+
+    <!-- Department filter option-->
+    <div>
+        <form>
+            Filter by Department:
+            <select id="depSelect" onchange="displayFilter()">
+                
+            </select>            
+        </form>
+    </div>
+    <br/>
+
+    <!--Data Table -->
+    <div id="display"></div>
+
+    <!-- Function Buttons -->
+    <br />
+    <button id="addbtn" onclick="createAddForm()">Add</button>
+    <button id="editbtn" onclick="editData()">Edit</button>
+    <button id="delbtn" onclick="delData()">Delete</button>
+    <br />
+
+    <!-- Areas for user input-->
+    <div id="addStuff"><br /></div>
+    <div id="editStuff"></div>
+
+    <!-- Javascript-->
+    <script type="text/javascript" src="script.js"></script>
+
+</body>
+
+</html>
